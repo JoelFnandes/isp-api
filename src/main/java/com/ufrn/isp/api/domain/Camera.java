@@ -12,10 +12,10 @@ public class Camera {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String localizacao; // Localização da câmera
-    private String tipo; // Tipo da câmera (fixa, móvel, etc.)
-    private String status; // Status da câmera (ativa, inativa)
-    private Timestamp dataInstalacao; // Data de instalação da câmera
+    private String localizacao;
+    private String tipo;
+    private String status;
+    private Timestamp dataInstalacao;
 
     // Getters e Setters
     public Long getId() {
