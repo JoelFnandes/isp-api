@@ -4,6 +4,7 @@ import com.ufrn.isp.api.domain.Request;
 import com.ufrn.isp.api.service.RequestService;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,5 +49,17 @@ public class MqttService {
         request.setDataCriacao(new Timestamp(System.currentTimeMillis()));
 
         requestService.save(request);
+    }
+
+    // Método para publicar mensagem via MQTT
+    public void publishMessage(String topic, String message) {
+        try {
+            MqttMessage mqttMessage = new MqttMessage();
+            mqttMessage.setPayload(message.getBytes());
+            mqttClient.publish(topic, mqttMessage);  // Publica a mensagem no tópico
+            System.out.println("Mensagem publicada no tópico " + topic + ": " + message);
+        } catch (Exception e) {
+            System.err.println("Erro ao publicar mensagem no MQTT: " + e.getMessage());
+        }
     }
 }
